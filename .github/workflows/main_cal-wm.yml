@@ -28,6 +28,8 @@ jobs:
           yarn set version stable
           yarn config set nodeLinker node-modules
           yarn install --immutable
+        env:
+          YARN_ENABLE_SCRIPTS: false
 
       - name: Build application
         run: yarn build
