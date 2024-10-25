@@ -26,7 +26,8 @@ jobs:
         run: |
           corepack enable
           yarn set version stable
-          yarn install
+          yarn config set nodeLinker node-modules
+          yarn install --immutable
 
       - name: Build application
         run: yarn build
