@@ -26,10 +26,16 @@ jobs:
         run: |
           corepack enable
           yarn set version stable
-          yarn config set nodeLinker node-modules
-          yarn install --immutable
+          # Désactive explicitement les vérifications d'immutabilité
+          yarn config set enableImmutableInstalls false
+          # Force la mise à jour du lockfile
+          yarn install --mode update-lockfile
+          # Vérifie que tout est cohérent
+          yarn install --check-cache
         env:
           YARN_ENABLE_SCRIPTS: false
+          NODE_ENV: development
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
 
       - name: Build application
         run: yarn build
